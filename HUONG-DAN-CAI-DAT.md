@@ -1,5 +1,7 @@
 # Hướng dẫn cài đặt
 
+> Cách dễ nhất: dán link repo vào Claude Code và nói "cài bộ skill này cho tôi" (xem README). File này dành cho người muốn tự cài bằng Terminal, hoặc để Claude tra khi cài gặp lỗi. `cai-dat.sh --tu-dong` cài không cần hỏi; `--lien-ket` nối skill ra `~/.claude/skills`.
+
 Bộ này viết cho macOS (chip Apple hoặc Intel). `cai-dat.sh` làm hầu hết các bước dưới đây.
 
 **Mọi lệnh trong file này chạy từ thư mục gốc bộ công cụ** (thư mục có `README.md`). Mở Terminal (nhấn ⌘ + dấu cách, gõ Terminal, nhấn Return), gõ `cd ` (có dấu cách), kéo thư mục `bo-video-y-khoa` từ Finder thả vào Terminal, rồi nhấn Return. Lệnh nào cần vào thư mục con đều viết trong ngoặc `( ... )` để tự quay về gốc. Đọc file này khi muốn cài tay, khi script báo thiếu gì đó, hoặc khi cài trên máy thứ hai.

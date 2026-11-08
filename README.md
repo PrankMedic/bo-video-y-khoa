@@ -42,6 +42,8 @@ Người dùng có thể không biết Terminal. Tự chạy mọi lệnh, giả
 4. Thấy `XONG`: mở ảnh khung thử cho người dùng xem bằng `open ~/bo-video-y-khoa/Output/mau/khung-thu.jpg`.
 5. Nói người dùng: mở thư mục `bo-video-y-khoa` trong thư mục nhà bằng Claude Code (app Claude → Code → chọn thư mục), rồi nói "bắt đầu". Skill `bat-dau` lo phần còn lại: hồ sơ kênh, khoá API, xem video mẫu.
 
+Trợ lý khác (Codex, Antigravity): cài giống hệt; skill nằm ở `.agents/skills/` của thư mục cài, mở thư mục đó là dùng được. `--lien-ket` chỉ nối cho Claude Code.
+
 Không đọc, in hay hỏi xin khoá API trong chat. Người dùng tự dán khoá vào `.env` (skill `bat-dau` mở file bằng TextEdit cho họ).
 
 Người dùng quen Terminal có thể tự chạy ba lệnh: `git clone` như bước 2, `cd ~/bo-video-y-khoa`, `bash cai-dat.sh`. Chi tiết từng thư viện, cách cài tay và sửa lỗi: [HUONG-DAN-CAI-DAT.md](HUONG-DAN-CAI-DAT.md).

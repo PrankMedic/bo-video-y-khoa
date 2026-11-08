@@ -109,18 +109,8 @@ if [ "$THIEU" -gt 0 ]; then
   exit 1
 fi
 
-if [ "$CHI_KIEM" = 0 ]; then
-  echo "6. Tạo video mẫu và chạy thử cả dây chuyền"
-  mkdir -p Output/mau
-  if bash work/tao_mau.sh > Output/mau/tao_mau.log 2>&1; then ok "tài nguyên mẫu (log: Output/mau/tao_mau.log)"
-  else echo "  tao_mau.sh lỗi, 15 dòng cuối log:"; grep -v AVFFrameReceiver Output/mau/tao_mau.log | tail -15; exit 1; fi
-  (cd remotion-demo && npx tsc --noEmit) && ok "TypeScript sạch lỗi" || { thieu "TypeScript"; exit 1; }
-  (cd remotion-demo && npx remotion still MauFlow ../Output/mau/khung-thu.jpg --frame=120 --scale=0.5 --port 3411 >/dev/null 2>&1) \
-    && ok "render thử một khung: Output/mau/khung-thu.jpg" || { thieu "render thử lỗi: cd remotion-demo && npx remotion still MauFlow /tmp/x.jpg --port 3411"; exit 1; }
-fi
-
 if [ "$LIEN_KET" = 1 ]; then
-  echo "7. Nối skill ra ~/.claude/skills"
+  echo "6. Nối skill ra ~/.claude/skills"
   mkdir -p ~/.claude/skills
   for d in .claude/skills/*/; do
     s=$(basename "$d")
@@ -129,6 +119,17 @@ if [ "$LIEN_KET" = 1 ]; then
   done
   echo "  Skill vẫn chạy script trong $GOC, đừng di chuyển thư mục này."
 fi
+
+if [ "$CHI_KIEM" = 0 ]; then
+  echo "7. Tạo video mẫu và chạy thử cả dây chuyền"
+  mkdir -p Output/mau
+  if bash work/tao_mau.sh > Output/mau/tao_mau.log 2>&1; then ok "tài nguyên mẫu (log: Output/mau/tao_mau.log)"
+  else echo "  tao_mau.sh lỗi, 15 dòng cuối log:"; grep -v AVFFrameReceiver Output/mau/tao_mau.log | tail -15; exit 1; fi
+  (cd remotion-demo && npx tsc --noEmit) && ok "TypeScript sạch lỗi" || { thieu "TypeScript"; exit 1; }
+  (cd remotion-demo && npx remotion still MauFlow ../Output/mau/khung-thu.jpg --frame=120 --scale=0.5 --port 3411 >/dev/null 2>&1) \
+    && ok "render thử một khung: Output/mau/khung-thu.jpg" || { thieu "render thử lỗi: cd remotion-demo && npx remotion still MauFlow /tmp/x.jpg --port 3411"; exit 1; }
+fi
+
 
 echo; echo "XONG. Thư mục bộ công cụ: $GOC"
 echo "Bước tiếp: mở thư mục này trong Claude Code và nói \"bắt đầu\" (skill bat-dau điền hồ sơ kênh, cho xem video mẫu)."

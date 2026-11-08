@@ -21,10 +21,24 @@ else
   echo "Tạm dùng giọng mặc định, phụ đề mẫu sẽ không khớp tiếng Việt."
   say -o "$D/giong.aiff" "$TEXT"
 fi
-"$FF" -v error -y -i "$D/giong.aiff" -ar 44100 -b:a 192k "$D/voice.mp3"
+"$FF" -v error -y -i "$D/giong.aiff" -ar 44100 -b:a 192k "$D/voice.mp3" 2>/dev/null || true
+DAI=$(python3 -I -c 'import sys; sys.path.insert(0, "."); import subprocess; from cong_cu import FFPROBE
+try: print(float(subprocess.run([FFPROBE, "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", sys.argv[1]], capture_output=True, text=True).stdout.strip() or 0))
+except ValueError: print(0)' "$D/voice.mp3")
 
 # 2. Gỡ băng từng từ, sửa chữ nghe sai, rồi xuất phụ đề sang Remotion
-python3 -I chuan_bi_giong.py "$D/voice.mp3" "$D"
+if python3 -I -c "import sys; sys.exit(0 if float('$DAI') > 3 else 1)"; then
+  python3 -I chuan_bi_giong.py "$D/voice.mp3" "$D"
+else
+  # Máy không tạo được giọng (say bị chặn hoặc lỗi): dùng phụ đề mẫu có sẵn và âm thanh im lặng, video mẫu vẫn xem được
+  echo "Không tạo được giọng mẫu bằng say (dài $DAI giây): dùng phụ đề có sẵn, âm thanh im lặng."
+  "$FF" -v error -y -f lavfi -i anullsrc=r=44100:cl=mono -t 17 -b:a 128k "$D/voice.mp3"
+  python3 -I - "$GOC/remotion-demo/src/flow/data/mau.words.json" "$D/words.json" <<'PY'
+import json, sys
+w = json.load(open(sys.argv[1], encoding="utf-8"))
+json.dump([{"w": x["text"], "s": x["startMs"] / 1000, "e": x["endMs"] / 1000} for x in w], open(sys.argv[2], "w", encoding="utf-8"), ensure_ascii=False)
+PY
+fi
 # Whisper hay nghe "giọng" thành "dòng": sửa trong corrections.json, đúng như cách làm với video thật.
 python3 -I - "$D" <<'PY'
 import json, sys

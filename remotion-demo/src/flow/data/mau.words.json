@@ -1,0 +1,258 @@
+[
+{
+"text": "Xin",
+"startMs": 120,
+"endMs": 290
+},
+{
+"text": "chào,",
+"startMs": 290,
+"endMs": 960,
+"pageBreakAfter": true
+},
+{
+"text": "đây",
+"startMs": 960,
+"endMs": 1150
+},
+{
+"text": "là",
+"startMs": 1150,
+"endMs": 1340
+},
+{
+"text": "video",
+"startMs": 1340,
+"endMs": 1820
+},
+{
+"text": "mẫu",
+"startMs": 1820,
+"endMs": 2090
+},
+{
+"text": "của",
+"startMs": 2090,
+"endMs": 2380
+},
+{
+"text": "bộ",
+"startMs": 2380,
+"endMs": 2560,
+"pageBreakAfter": true
+},
+{
+"text": "công",
+"startMs": 2560,
+"endMs": 2970
+},
+{
+"text": "cụ,",
+"startMs": 2970,
+"endMs": 3690,
+"pageBreakAfter": true
+},
+{
+"text": "mỗi",
+"startMs": 3690,
+"endMs": 3870
+},
+{
+"text": "ý",
+"startMs": 3870,
+"endMs": 3970
+},
+{
+"text": "trên",
+"startMs": 3970,
+"endMs": 4330
+},
+{
+"text": "màn",
+"startMs": 4330,
+"endMs": 4600
+},
+{
+"text": "hình",
+"startMs": 4600,
+"endMs": 4960
+},
+{
+"text": "đều",
+"startMs": 4960,
+"endMs": 5230,
+"pageBreakAfter": true
+},
+{
+"text": "bám",
+"startMs": 5230,
+"endMs": 5500
+},
+{
+"text": "theo",
+"startMs": 5500,
+"endMs": 5870
+},
+{
+"text": "lời",
+"startMs": 5870,
+"endMs": 6140
+},
+{
+"text": "nói,",
+"startMs": 6140,
+"endMs": 6890,
+"pageBreakAfter": true
+},
+{
+"text": "khi",
+"startMs": 6890,
+"endMs": 6930
+},
+{
+"text": "có",
+"startMs": 6930,
+"endMs": 7150
+},
+{
+"text": "số",
+"startMs": 7150,
+"endMs": 7290
+},
+{
+"text": "liệu,",
+"startMs": 7290,
+"endMs": 7830,
+"pageBreakAfter": true
+},
+{
+"text": "video",
+"startMs": 7830,
+"endMs": 8280
+},
+{
+"text": "hiện",
+"startMs": 8280,
+"endMs": 8640
+},
+{
+"text": "thêm",
+"startMs": 8640,
+"endMs": 9000
+},
+{
+"text": "dòng",
+"startMs": 9000,
+"endMs": 9360
+},
+{
+"text": "nguồn",
+"startMs": 9360,
+"endMs": 9810
+},
+{
+"text": "để",
+"startMs": 9810,
+"endMs": 9990,
+"pageBreakAfter": true
+},
+{
+"text": "người",
+"startMs": 9990,
+"endMs": 10440
+},
+{
+"text": "xem",
+"startMs": 10440,
+"endMs": 10710
+},
+{
+"text": "tự",
+"startMs": 10710,
+"endMs": 10890
+},
+{
+"text": "kiểm",
+"startMs": 10890,
+"endMs": 11250
+},
+{
+"text": "tra,",
+"startMs": 11250,
+"endMs": 11740,
+"pageBreakAfter": true
+},
+{
+"text": "hãy",
+"startMs": 11740,
+"endMs": 12130
+},
+{
+"text": "thay",
+"startMs": 12130,
+"endMs": 12420
+},
+{
+"text": "giọng",
+"startMs": 12420,
+"endMs": 12740
+},
+{
+"text": "mẫu",
+"startMs": 12740,
+"endMs": 13010
+},
+{
+"text": "bằng",
+"startMs": 13010,
+"endMs": 13380
+},
+{
+"text": "giọng",
+"startMs": 13380,
+"endMs": 13810,
+"pageBreakAfter": true
+},
+{
+"text": "của",
+"startMs": 13810,
+"endMs": 14030
+},
+{
+"text": "bạn,",
+"startMs": 14030,
+"endMs": 14490,
+"pageBreakAfter": true
+},
+{
+"text": "rồi",
+"startMs": 14490,
+"endMs": 14770
+},
+{
+"text": "bắt",
+"startMs": 14770,
+"endMs": 15040
+},
+{
+"text": "đầu",
+"startMs": 15040,
+"endMs": 15320
+},
+{
+"text": "video",
+"startMs": 15320,
+"endMs": 15790
+},
+{
+"text": "đầu",
+"startMs": 15790,
+"endMs": 16070
+},
+{
+"text": "tiên.",
+"startMs": 16070,
+"endMs": 16560,
+"pageBreakAfter": true
+}
+]

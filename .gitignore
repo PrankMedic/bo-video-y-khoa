@@ -1,0 +1,24 @@
+# Khoá và cache
+.env
+tai-lieu/kho-bang-chung/.cache/
+.DS_Store
+
+# Video, âm thanh, ảnh dự án: không đưa lên git
+Raw/
+Output/
+*.mp4
+!docs/*.mp4
+*.mov
+*.MOV
+*.wav
+*.m4a
+*.mp3
+*.aiff
+# Tài nguyên tạo lúc cài (work/tao_mau.sh)
+remotion-demo/public/
+remotion-demo/src/gioi-thieu/
+
+# Remotion
+remotion-demo/node_modules/
+remotion-demo/out/
+remotion-demo/build/

@@ -3,15 +3,17 @@
 #   bash cai-dat.sh             kiểm tra, hỏi trước khi cài phần thiếu, rồi tạo video mẫu
 #   bash cai-dat.sh --kiem-tra  chỉ kiểm tra, không cài gì
 #   bash cai-dat.sh --lien-ket  nối skill ra ~/.claude/skills để dùng ở mọi thư mục
-#   bash cai-dat.sh --model small   tải model Whisper nhỏ (máy 8 GB RAM)
+#   bash cai-dat.sh --tu-dong   không hỏi: tự cài phần thiếu bằng Homebrew, tự tải model (dùng khi Claude Code cài hộ)
+#   bash cai-dat.sh --model small|large   chọn model Whisper (mặc định theo RAM: từ 16 GB dùng large, ít hơn dùng small)
 set -uo pipefail
 GOC=$(cd "$(dirname "$0")" && pwd)
 cd "$GOC"
-CHI_KIEM=0; LIEN_KET=0; MODEL=""
+CHI_KIEM=0; LIEN_KET=0; TU_DONG=0; MODEL=""
 while [ $# -gt 0 ]; do
   case $1 in
     --kiem-tra) CHI_KIEM=1 ;;
     --lien-ket) LIEN_KET=1 ;;
+    --tu-dong) TU_DONG=1 ;;
     --model) MODEL=${2:-}; shift ;;
     *) echo "Tham số không hợp lệ: $1"; exit 2 ;;
   esac
@@ -24,16 +26,30 @@ for p in /opt/homebrew/bin /usr/local/bin; do
 done
 export PATH
 
-ok() { printf '  \033[32mOK\033[0m   %s\n' "$1"; }
-thieu() { printf '  \033[31mTHIẾU\033[0m %s\n' "$1"; THIEU=$((THIEU + 1)); }
-hoi() { [ "$CHI_KIEM" = 1 ] && return 1; read -r -p "  → $1 [c/k] " tl; [ "$tl" = "c" ] || [ "$tl" = "C" ]; }
+if [ -t 1 ]; then XANH='\033[32m'; DO='\033[31m'; HET='\033[0m'; else XANH=''; DO=''; HET=''; fi
+ok() { printf "  ${XANH}OK${HET}   %s\n" "$1"; }
+thieu() { printf "  ${DO}THIẾU${HET} %s\n" "$1"; THIEU=$((THIEU + 1)); }
+# Không có bàn phím (Claude Code chạy hộ) mà thiếu --tu-dong thì coi như trả lời "không".
+hoi() {
+  [ "$CHI_KIEM" = 1 ] && return 1
+  [ "$TU_DONG" = 1 ] && { echo "  → $1 có (--tu-dong)"; return 0; }
+  [ -t 0 ] || return 1
+  read -r -p "  → $1 [c/k] " tl; [ "$tl" = "c" ] || [ "$tl" = "C" ]
+}
 THIEU=0
 
 echo "1. Công cụ dòng lệnh"
-if command -v brew >/dev/null; then ok "Homebrew"; else
-  thieu "Homebrew: cài theo https://brew.sh rồi chạy lại script này"
+if xcode-select -p >/dev/null 2>&1; then ok "Command Line Tools của Apple"; else
+  thieu "CẦN_CLT: Command Line Tools của Apple (có git, python3). Đã mở hộp thoại cài: bấm Cài đặt, chờ xong rồi chạy lại."
+  xcode-select --install >/dev/null 2>&1 || true
+  exit 3
 fi
-command -v python3 >/dev/null && ok "Python $(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')" || thieu "python3: chạy xcode-select --install"
+if command -v brew >/dev/null; then ok "Homebrew"; else
+  thieu "CẦN_HOMEBREW: tải file Homebrew-....pkg ở https://github.com/Homebrew/brew/releases/latest, bấm đúp để cài (cần mật khẩu máy), rồi chạy lại."
+  [ "$TU_DONG" = 1 ] && open "https://github.com/Homebrew/brew/releases/latest" 2>/dev/null
+  exit 3
+fi
+command -v python3 >/dev/null && ok "Python $(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:2])))')" || thieu "python3"
 
 can_brew=()
 if command -v node >/dev/null; then
@@ -58,8 +74,11 @@ if ls ~/whisper-models/ggml-*.bin >/dev/null 2>&1; then
   ok "$(ls ~/whisper-models/ggml-*.bin | head -1)"
 else
   thieu "chưa có model"
+  ram=$(( $(sysctl -n hw.memsize 2>/dev/null || echo 0) / 1073741824 ))
+  [ -z "$MODEL" ] && { [ "$ram" -ge 16 ] && MODEL=large || MODEL=small; }
   ten=ggml-large-v3-turbo-q5_0.bin
   [ "$MODEL" = "small" ] && ten=ggml-small.bin
+  echo "  RAM ${ram} GB, chọn model $MODEL"
   if hoi "Tải $ten (khoảng 0,5 GB)?"; then
     mkdir -p ~/whisper-models
     curl -L --fail -o ~/whisper-models/$ten.tmp "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/$ten" \
@@ -83,6 +102,8 @@ if [ -d remotion-demo/node_modules/remotion ]; then ok "node_modules"; elif [ "$
   (cd remotion-demo && npm ci --no-audit --no-fund) && ok "đã cài node_modules" || thieu "npm ci lỗi"
 else thieu "chưa cài: cd remotion-demo && npm ci"; fi
 
+# Model vừa tải thì cong_cu.py lúc nãy chưa thấy: kiểm tra lại trước khi kết luận
+if [ "$THIEU" -gt 0 ] && python3 -I work/cong_cu.py >/dev/null 2>&1 && [ -d remotion-demo/node_modules/remotion ]; then THIEU=0; fi
 if [ "$THIEU" -gt 0 ]; then
   echo; echo "Còn $THIEU mục thiếu. Xem HUONG-DAN-CAI-DAT.md, cài xong chạy lại bash cai-dat.sh."
   exit 1
@@ -109,5 +130,5 @@ if [ "$LIEN_KET" = 1 ]; then
   echo "  Skill vẫn chạy script trong $GOC, đừng di chuyển thư mục này."
 fi
 
-echo; echo "Xong. Điền CLAUDE.md và remotion-demo/src/brand.ts, rồi mở thư mục này trong Claude Code."
-echo "Xem video mẫu: cd remotion-demo && npx remotion studio --port 3123"
+echo; echo "XONG. Thư mục bộ công cụ: $GOC"
+echo "Bước tiếp: mở thư mục này trong Claude Code và nói \"bắt đầu\" (skill bat-dau điền hồ sơ kênh, cho xem video mẫu)."

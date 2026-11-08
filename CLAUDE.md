@@ -1,6 +1,6 @@
 # Hồ sơ kênh
 
-Claude đọc file này đầu mỗi phiên. Điền các chỗ `<...>` trước khi dùng. Sau này khi bạn sửa một lỗi Claude có thể lặp lại, Claude sẽ đề xuất thêm một dòng luật vào đây.
+Claude đọc file này đầu mỗi phiên. Các chỗ `<...>` còn trống thì dùng skill `bat-dau` để hỏi người dùng và điền, trước khi làm nội dung. Người dùng có thể không biết Terminal: Claude tự chạy lệnh, dùng `open` để mở thư mục, file, trang web cho họ xem. Sau này khi bạn sửa một lỗi Claude có thể lặp lại, Claude sẽ đề xuất thêm một dòng luật vào đây.
 
 ## Kênh
 

@@ -13,32 +13,38 @@ Bạn nói với Claude bằng tiếng Việt, ví dụ "kiểm chứng nguồn 
 | `video-flow-minh-hoa` | Clip hoặc file ghi âm | Video không lộ mặt: ảnh minh hoạ (Google Flow) xen slide số liệu, giá và nguồn |
 | `dinh-dang-video` | Clip, ghi âm hoặc chỉ text | Chọn một trong 6 định dạng: Thẳng mặt, Tạp chí, Phủ đồ hoạ, Bản ngang 16:9, Hoạt hình, Sổ tay |
 | `ban-tin-pubmed` | Một chủ đề | Bản tin 60 giây từ toàn văn một nghiên cứu, có chặn số sai, giọng AI |
+| `bat-dau` | "bắt đầu", "mở video mẫu", "cập nhật bộ skill" | Điền hồ sơ kênh, nhập khoá, xem mẫu, mở thư mục, cập nhật, không cần Terminal |
 | `goi-codex`, `goi-gemini`, `goi-antigravity` | (tuỳ chọn) | Giao phần viết code, góp ý hình cho tác nhân khác để tiết kiệm token Claude |
 
-## Cài nhanh (Mac)
+## Cài đặt: chỉ cần dán link vào Claude Code
 
-Mở Terminal (⌘ + dấu cách, gõ Terminal), dán ba dòng sau:
+Không cần biết Terminal.
 
-```bash
-git clone https://github.com/PrankMedic/bo-video-y-khoa.git ~/bo-video-y-khoa
-cd ~/bo-video-y-khoa
-bash cai-dat.sh
-```
+1. Mở app **Claude** trên Mac, vào tab **Code**.
+2. Dán vào ô chat: **Cài bộ skill này cho tôi: https://github.com/PrankMedic/bo-video-y-khoa**
+3. Claude tự làm hết. Khi Claude xin phép chạy lệnh, bấm **Cho phép**. Nếu máy hiện hộp thoại cài đặt của Apple hoặc trình cài Homebrew, bấm **Cài đặt** và nhập mật khẩu máy Mac của bạn (chỉ nhập vào hộp thoại của máy, không nhập vào ô chat).
+4. Cài xong (5–15 phút, tuỳ mạng), mở thư mục **bo-video-y-khoa** (trong thư mục nhà của bạn) bằng Claude Code và nói **"bắt đầu"**. Claude sẽ hỏi tên kênh, lĩnh vực, người duyệt nội dung, rồi mở video mẫu cho bạn xem.
 
-Máy chưa có `git` thì macOS sẽ hỏi cài Command Line Tools: bấm Cài đặt, chờ xong rồi dán lại. Không muốn dùng git: bấm **Code → Download ZIP** trên trang GitHub, giải nén, rồi chạy `bash cai-dat.sh` trong thư mục đó.
-
-Cập nhật bản mới: `cd ~/bo-video-y-khoa && git pull && bash cai-dat.sh`. File của bạn (`.env`, `CLAUDE.md` đã điền, `Raw/`, `Output/`, kho bằng chứng) không bị ghi đè khi pull, trừ khi bản mới sửa đúng file đó; khi đó git sẽ báo để bạn chọn.
+Sau đó chỉ cần nói việc muốn làm, ví dụ "kiểm chứng nguồn cho kịch bản này", "dựng video slide cho clip tôi vừa bỏ vào thư mục Raw", "làm bản tin từ bài PubMed về vitamin C". Cập nhật bản mới: nói "cập nhật bộ skill".
 
 Xem video giới thiệu 52 giây: [docs/gioi-thieu.mp4](docs/gioi-thieu.mp4).
 
-Script kiểm tra máy, cài phần còn thiếu bằng Homebrew (hỏi trước khi cài), tải model Whisper, cài thư viện Remotion, rồi tạo một video mẫu để thử cả dây chuyền. Chi tiết từng thư viện, cách cài tay và cách sửa lỗi xem [HUONG-DAN-CAI-DAT.md](HUONG-DAN-CAI-DAT.md).
+### Dành cho Claude Code: cách cài khi người dùng dán link này
 
-Sau khi cài:
+Người dùng có thể không biết Terminal. Tự chạy mọi lệnh, giải thích từng bước bằng một câu tiếng Việt, không bảo người dùng gõ lệnh.
 
-1. Mở `CLAUDE.md`, điền hồ sơ kênh: tên, người duyệt nội dung, giọng văn, lĩnh vực.
-2. Mở `remotion-demo/src/brand.ts`, đổi `TÊN KÊNH` thành tên của bạn.
-3. Điền khoá vào `.env`. Nên có `PUBMED_API_KEY` và `NCBI_EMAIL` (miễn phí, tra PubMed nhanh hơn); không có vẫn chạy được nhưng chậm hơn.
-4. Mở thư mục này trong Claude Code, rồi gõ vào ô chat với Claude (không phải Terminal): "mở studio xem các video mẫu".
+1. Thư mục cài là `~/bo-video-y-khoa`. Đã có thư mục đó thì `git -C ~/bo-video-y-khoa pull --ff-only` thay vì tải lại.
+2. Chưa có thì tải về: `git clone https://github.com/PrankMedic/bo-video-y-khoa.git ~/bo-video-y-khoa`. Máy chưa có Command Line Tools thì lệnh `git` sẽ làm macOS hiện hộp thoại cài: nói người dùng bấm Cài đặt, chờ họ báo xong rồi chạy lại.
+3. Chạy `bash ~/bo-video-y-khoa/cai-dat.sh --tu-dong --lien-ket` ở chế độ chạy nền (tải model Whisper khoảng 0,5 GB và thư viện khoảng 1 GB), đọc kết quả khi xong.
+   - Kết quả có `CẦN_HOMEBREW`: script đã mở trang tải Homebrew. Hướng dẫn người dùng tải file `.pkg` mới nhất ở mục Assets, bấm đúp, cài, nhập mật khẩu máy trong trình cài. Không tự cài Homebrew bằng lệnh có `sudo`, không hỏi mật khẩu trong chat. Người dùng báo xong thì chạy lại bước 3.
+   - Kết quả có `CẦN_CLT`: hộp thoại cài Command Line Tools đã mở; chờ người dùng cài xong rồi chạy lại bước 3.
+   - Mục `THIẾU` khác: xử lý theo `HUONG-DAN-CAI-DAT.md` trong thư mục cài, rồi chạy lại bước 3.
+4. Thấy `XONG`: mở ảnh khung thử cho người dùng xem bằng `open ~/bo-video-y-khoa/Output/mau/khung-thu.jpg`.
+5. Nói người dùng: mở thư mục `bo-video-y-khoa` trong thư mục nhà bằng Claude Code (app Claude → Code → chọn thư mục), rồi nói "bắt đầu". Skill `bat-dau` lo phần còn lại: hồ sơ kênh, khoá API, xem video mẫu.
+
+Không đọc, in hay hỏi xin khoá API trong chat. Người dùng tự dán khoá vào `.env` (skill `bat-dau` mở file bằng TextEdit cho họ).
+
+Người dùng quen Terminal có thể tự chạy ba lệnh: `git clone` như bước 2, `cd ~/bo-video-y-khoa`, `bash cai-dat.sh`. Chi tiết từng thư viện, cách cài tay và sửa lỗi: [HUONG-DAN-CAI-DAT.md](HUONG-DAN-CAI-DAT.md).
 
 ## Cấu trúc
 

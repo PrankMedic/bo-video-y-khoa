@@ -32,7 +32,7 @@ Tự đọc phương pháp, bảng và phần giới hạn, không dừng ở ab
 
 ## 3. Kịch bản
 
-`kich-ban.txt`, khoảng 190–210 từ (55–70 giây). Mở bằng tên bản tin của kênh và một câu hỏi. Có câu về an toàn hoặc chống chỉ định khi nghiên cứu có nêu. Thuốc thì nói cần bác sĩ chỉ định. Không cam kết kết quả, không tên thương mại. Kết bằng lời mời bình luận.
+`kich-ban.txt`, khoảng 190–210 từ (55–70 giây). Mở bằng câu hỏi hoặc con số của nghiên cứu (chữ trên màn hình từ khung 0), rồi mới đến tên bản tin. Hứa một điều ở câu thứ hai và trả ở cuối. Có một câu gợi lại ở 50–80% thời lượng. Chi tiết: [hook-va-nhip.md](../dinh-dang-video/references/hook-va-nhip.md). Có câu về an toàn hoặc chống chỉ định khi nghiên cứu có nêu. Thuốc thì nói cần bác sĩ chỉ định. Không cam kết kết quả, không tên thương mại. Kết bằng lời mời bình luận.
 
 Mọi số tự tính khai trong `so-tinh.json`, ví dụ `{"41": "(6.83-4.02)/6.83*100"}`.
 

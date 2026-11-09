@@ -69,7 +69,7 @@ Xem trong lúc làm: `npx remotion studio --port 3123`, mở `http://localhost:3
 ## 5. Âm thanh
 
 - Nhạc nền `DuckedMusic` với `staticFile("music/bg-pad.wav")`, `speechVolume={0.22}`, `gapVolume={0.4}`, `fadeOutSeconds={2}`. Nhạc tự giảm khi có lời. File nhạc là bản tổng hợp tạm, thay khi có nhạc có giấy phép.
-- Hook mỗi 8–10 giây, đúng lúc đổi slide hoặc hiện số liệu: whoosh (0,45) đổi slide, ding (0,35) số liệu, switch (0,5) cảnh báo. Thẻ còn lại: click (0,3).
+- Hook theo [hook-va-nhip.md](../dinh-dang-video/references/hook-va-nhip.md): câu mở ba lớp (chữ, thoại, tiếng nhấn) trong 3 giây đầu, âm thanh cách nhau không quá 10 giây và xoay vòng loại tiếng, một câu gợi lại ở 50–80% thời lượng. Tiếng: whoosh (0,45) đổi slide, ding (0,35) số liệu, switch (0,5) cảnh báo, click (0,3) thẻ còn lại. Ghi `hooks.json` và chấm bằng `python3 -I work/kiem_hook.py`.
 - SFX trong `Header.tsx` lấy từ `https://remotion.media/*.wav`, cần mạng khi render.
 
 ## 6. Kiểm tra

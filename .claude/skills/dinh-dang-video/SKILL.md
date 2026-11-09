@@ -66,7 +66,8 @@ Mã trong `src/formats/effects.tsx`. SFX tạo bằng `python3 -I work/tao_sfx.p
 
 - `TwoLineCue`: mỗi cụm tối đa hai hàng. Nền sáng truyền `light={màu nền}`.
 - `LightTransition` (`burn` hoặc `leak`): tối đa 2–3 lần mỗi video, chỉ ở điểm chuyển ý lớn, không dùng khi đang nói về da, tổn thương hay biến chứng.
-- `Sfx`: `whoosh` ở điểm chuyển cảnh, `digital` lúc thông tin hiện ra; nhỏ hơn giọng (thử 0,45 và 0,7).
+- `Sfx`: `whoosh` ở điểm chuyển cảnh, `digital` lúc thông tin hiện ra, `hit` câu mở và cú chốt, `tick` mục nhỏ, `riser` dẫn vào câu gợi lại; nhỏ hơn giọng.
+- Hook và nhịp: theo [references/hook-va-nhip.md](references/hook-va-nhip.md). Ghi `hooks.json` và chấm bằng `python3 -I work/kiem_hook.py` trước khi render.
 
 ## Icon
 

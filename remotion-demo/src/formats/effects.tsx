@@ -146,14 +146,14 @@ export const LightTransition = ({
 };
 
 /** Giây từ đầu file đến đỉnh tiếng, để đỉnh rơi đúng điểm cần nhấn (xem work/tao_sfx.py). */
-const SFX_PEAK = { whoosh: 0.3, digital: 0 };
+const SFX_PEAK = { whoosh: 0.3, digital: 0, hit: 0, tick: 0, riser: 1.5 };
 
 /** SFX riêng trong public/sfx/, tạo bằng work/tao_sfx.py. */
 export const Sfx = ({ kind, atMs, volume = 1 }: { readonly kind: keyof typeof SFX_PEAK; readonly atMs: number; readonly volume?: number }) => {
   const { fps } = useVideoConfig();
   const from = Math.max(0, Math.round((atMs / 1000 - SFX_PEAK[kind]) * fps));
   return (
-    <Sequence from={from} durationInFrames={Math.round(fps)} layout="none" name={kind}>
+    <Sequence from={from} durationInFrames={Math.round(fps * 2)} layout="none" name={kind}>
       <Audio src={staticFile(`sfx/${kind}.wav`)} volume={volume} />
     </Sequence>
   );

@@ -79,7 +79,7 @@ Lệnh ghi `remotion-demo/src/flow/data/<slug>.words.json` và chép giọng, �
 - Neo mọi mốc bằng `saidAt(words, "cụm từ")`, không gõ tay số giây.
 - `durationInFrames` = `ceil((thời lượng giọng + 0,8) × 30)`.
 - `Headline` đặt trong vùng trên cùng của ảnh. `ValuesSlide` chứa khoảng 3 hàng và một dòng cuối; thêm dòng nguồn thì kiểm tra không đè phụ đề ở y=1440.
-- Âm thanh: `DuckedMusic` như mẫu, hook khoảng 8–10 giây một lần.
+- Âm thanh: `DuckedMusic` như mẫu. Hook theo [hook-va-nhip.md](../dinh-dang-video/references/hook-va-nhip.md), chấm bằng `work/kiem_hook.py`.
 
 ## 7. Soát trước khi render
 
